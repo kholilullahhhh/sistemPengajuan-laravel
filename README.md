@@ -53,6 +53,7 @@ directory
 -   Run `npx mix` command
 -   Run `cp .env.example .env` command
 -   Run `php artisan key:generate` command
+-   Run `php artisan migrate --seed`
 -   Run `php artisan serve` command
 -   Done
 
