@@ -47,7 +47,7 @@
 Several quick start options are available:
 
 -   Clone the repo: `https://github.com/kholilullahhhh/sistemPengajuanPKH-laravel.git`
--   Run `cd` to the newly created `/laravel-stisla` directory
+directory
 -   Run `composer install` command
 -   Run `npm install` command
 -   Run `npx mix` command
