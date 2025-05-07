@@ -39,25 +39,25 @@
                                             @foreach ($data as $i => $v)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $v->pelanggan->nama_222406 }}</td>
-                                                    <td>{{ $v->keluhan_222406 }}</td>
-                                                    <td>{{ $v->tgl_keluhan_222406 }}</td>
+                                                    <td>{{ $v->pelanggan->nama }}</td>
+                                                    <td>{{ $v->keluhan }}</td>
+                                                    <td>{{ $v->tgl_keluhan }}</td>
                                                     <td>
-                                                        @if ($v->status_keluhan_222406 == 'Diproses')
+                                                        @if ($v->status_keluhan == 'Diproses')
                                                             <div class="badge badge-primary">
-                                                                {{ $v->status_keluhan_222406 }}
+                                                                {{ $v->status_keluhan }}
                                                             </div>
-                                                        @elseif ($v->status_keluhan_222406 == 'Pending')
+                                                        @elseif ($v->status_keluhan == 'Pending')
                                                             <div class="badge badge-warning">
-                                                                {{ $v->status_keluhan_222406 }}
+                                                                {{ $v->status_keluhan }}
                                                             </div>
                                                         @else
                                                             <div class="badge badge-success">
-                                                                {{ $v->status_keluhan_222406 }}
+                                                                {{ $v->status_keluhan }}
                                                             </div>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $v->kategori->nama_kategori_222406 }}</td>
+                                                    <td>{{ $v->kategori->nama_kategori }}</td>
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
                                                             data-target="#modal-form" class="modalEdit">
@@ -130,11 +130,11 @@
                         success: function(response) {
                             // Isi modal dengan data dari server
                             $('#formId').val(response.data.id);
-                            $('#id_pelanggan_222406').val(response.data.id_pelanggan_222406);
-                            $('#keluhan_222406').val(response.data.keluhan_222406);
-                            $('#tgl_keluhan_222406').val(response.data.tgl_keluhan_222406);
-                            $('#status_keluhan_222406').val(response.data.status_keluhan_222406);
-                            $('#id_kategori_222406').val(response.data.id_kategori_222406);
+                            $('#id_pelanggan').val(response.data.id_pelanggan);
+                            $('#keluhan').val(response.data.keluhan);
+                            $('#tgl_keluhan').val(response.data.tgl_keluhan);
+                            $('#status_keluhan').val(response.data.status_keluhan);
+                            $('#id_kategori').val(response.data.id_kategori);
 
                             // Tampilkan modal
                             $('#modal-form').modal('show');

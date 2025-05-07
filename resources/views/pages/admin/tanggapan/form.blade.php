@@ -16,20 +16,20 @@
 
                     <div class="form-group">
                         <label for="name">Nama Keluhan</label>
-                        <select name="id_keluhan_222406" id="id_keluhan_222406" class="form-control" required>
+                        <select name="id_keluhan" id="id_keluhan" class="form-control" required>
                             <option value="">-- pilih keluhan --</option>
                             @foreach ($keluhan as $v)
-                                <option value="{{ $v->id }}">{{ $v->keluhan_222406 }}</option>
+                                <option value="{{ $v->id }}">{{ $v->keluhan }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Tanggapan</label>
-                        <input type="text" name="tanggapan_222406" id="tanggapan_222406" class="form-control" required>
+                        <input type="text" name="tanggapan" id="tanggapan" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="role">Tanggal Tanggapan</label>
-                        <input type="date" name="tgl_tanggapan_222406" id="tgl_tanggapan_222406" value="{{ date('Y-m-d') }}" readonly class="form-control">
+                        <input type="date" name="tgl_tanggapan" id="tgl_tanggapan" value="{{ date('Y-m-d') }}" readonly class="form-control">
                     </div>
 
                     <button type="submit" id="submitUpdate" class="btn btn-primary">Tambah</button>

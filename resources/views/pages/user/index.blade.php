@@ -9,7 +9,7 @@
             <div class="section-header">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Sistem Pengajuan PKH Kelurahan Mangkoso</h1>
+                        <h1>Aplikasi Pengajuan Sistem Informasi Pencatatan Keluhan Pelanggan Berbasis Web</h1>
 
                     </div>
 

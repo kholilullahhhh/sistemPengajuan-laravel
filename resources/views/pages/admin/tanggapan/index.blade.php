@@ -37,9 +37,9 @@
                                             @foreach ($data as $i => $v)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $v->keluhan->pelanggan->nama_222406 }}</td>
-                                                    <td>{{ $v->tanggapan_222406 }}</td>
-                                                    <td>{{ $v->tgl_tanggapan_222406 }}</td>
+                                                    <td>{{ $v->keluhan->pelanggan->nama }}</td>
+                                                    <td>{{ $v->tanggapan }}</td>
+                                                    <td>{{ $v->tgl_tanggapan }}</td>
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
                                                             data-target="#modal-form" class="modalEdit">
@@ -110,9 +110,9 @@
                         success: function(response) {
                             // Isi modal dengan data dari server
                             $('#formId').val(response.data.id);
-                            $('#id_keluhan_222406').val(response.data.id_keluhan_222406);
-                            $('#tanggapan_222406').val(response.data.tanggapan_222406);
-                            $('#tgl_tanggapan_222406').val(response.data.tgl_tanggapan_222406);
+                            $('#id_keluhan').val(response.data.id_keluhan);
+                            $('#tanggapan').val(response.data.tanggapan);
+                            $('#tgl_tanggapan').val(response.data.tgl_tanggapan);
 
                             // Tampilkan modal
                             $('#modal-form').modal('show');

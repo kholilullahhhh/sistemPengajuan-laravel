@@ -40,12 +40,12 @@
                                             @foreach ($data as $i => $v)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $v->nama_222406 }}</td>
-                                                    <td>{{ $v->email_222406 }}</td>
-                                                    <td>{{ $v->telepon_222406 }}</td>
-                                                    <td>{{ $v->alamat_222406 }}</td>
-                                                    <td>{{ $v->jkl_222406 }}</td>
-                                                    <td>{{ $v->tgl_terdaftar_222406 }}</td>
+                                                    <td>{{ $v->nama }}</td>
+                                                    <td>{{ $v->email }}</td>
+                                                    <td>{{ $v->telepon }}</td>
+                                                    <td>{{ $v->alamat }}</td>
+                                                    <td>{{ $v->jkl }}</td>
+                                                    <td>{{ $v->tgl_terdaftar }}</td>
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
                                                             data-target="#modal-form" class="modalEdit">
@@ -116,12 +116,12 @@
                         success: function(response) {
                             // Isi modal dengan data dari server
                             $('#formId').val(response.data.id);
-                            $('#nama_222406').val(response.data.nama_222406);
-                            $('#email_222406').val(response.data.email_222406);
-                            $('#tgl_terdaftar_222406').val(response.data.tgl_terdaftar_222406);
-                            $('#jkl_222406').val(response.data.jkl_222406);
-                            $('#telepon_222406').val(response.data.telepon_222406);
-                            $('#alamat_222406').val(response.data.alamat_222406);
+                            $('#nama').val(response.data.nama);
+                            $('#email').val(response.data.email);
+                            $('#tgl_terdaftar').val(response.data.tgl_terdaftar);
+                            $('#jkl').val(response.data.jkl);
+                            $('#telepon').val(response.data.telepon);
+                            $('#alamat').val(response.data.alamat);
 
                             // Tampilkan modal
                             $('#modal-form').modal('show');

@@ -48,22 +48,22 @@
                                             @foreach ($data as $i => $v)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $v->keluhan->pelanggan->nama_222406 }}</td>
-                                                    <td>{{ $v->keluhan->keluhan_222406 }}</td>
-                                                    <td>{{ $v->keluhan->Kategori->nama_kategori_222406 }}</td>
-                                                    <td>{{ $v->tanggapan_222406 }}</td>
+                                                    <td>{{ $v->keluhan->pelanggan->nama }}</td>
+                                                    <td>{{ $v->keluhan->keluhan }}</td>
+                                                    <td>{{ $v->keluhan->Kategori->nama_kategori }}</td>
+                                                    <td>{{ $v->tanggapan }}</td>
                                                     <td>
-                                                        @if ($v->keluhan->status_keluhan_222406 == 'Diproses')
+                                                        @if ($v->keluhan->status_keluhan == 'Diproses')
                                                             <div class="badge badge-primary">
-                                                                {{ $v->keluhan->status_keluhan_222406 }}
+                                                                {{ $v->keluhan->status_keluhan }}
                                                             </div>
-                                                        @elseif ($v->keluhan->status_keluhan_222406 == 'Pending')
+                                                        @elseif ($v->keluhan->status_keluhan == 'Pending')
                                                             <div class="badge badge-warning">
-                                                                {{ $v->keluhan->status_keluhan_222406 }}
+                                                                {{ $v->keluhan->status_keluhan }}
                                                             </div>
                                                         @else
                                                             <div class="badge badge-success">
-                                                                {{ $v->keluhan->status_keluhan_222406 }}
+                                                                {{ $v->keluhan->status_keluhan }}
                                                             </div>
                                                         @endif
                                                     </td>

@@ -19,13 +19,13 @@
                             <div class="col-md">
                                 <div class="form-group">
                                     <label>Nama Lengkap</label>
-                                    <input required name="nama_222406" id="nama_222406" type="text" class="form-control">
+                                    <input required name="nama" id="nama" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input required name="email_222406" id="email_222406" type="email" class="form-control">
+                                    <input required name="email" id="email" type="email" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
-                                    <select required name="jkl_222406" id="jkl_222406" class="form-control ">
+                                    <select required name="jkl" id="jkl" class="form-control ">
                                         <option value="">-- Pilih Jenis Kelamin --</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
@@ -46,14 +46,14 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>No Telp</label>
-                                    <input type="text" required name="telepon_222406" id="telepon_222406" class="form-control " />
+                                    <input type="text" required name="telepon" id="telepon" class="form-control " />
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Alamat</label>
-                                    <input type="text" required name="alamat_222406" id="alamat_222406" class="form-control " />
+                                    <input type="text" required name="alamat" id="alamat" class="form-control " />
                                 </div>
                             </div>
 
