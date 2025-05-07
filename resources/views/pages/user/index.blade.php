@@ -38,7 +38,7 @@
                             </div>
 
 
-                            <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-body text-justify" style="font-size: 18px; ">
                                     <p><strong>Aplikasi Pengajuan Sistem Informasi Pencatatan Keluhan Pelanggan Berbasis
                                             Web</strong> dirancang untuk memberikan kemudahan bagi pelanggan dalam
@@ -160,7 +160,7 @@
 
 
                                 </div>
-                            </div>
+                            </div> -->
 
 
                         </div>
