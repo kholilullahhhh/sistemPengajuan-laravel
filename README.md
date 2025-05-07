@@ -46,13 +46,14 @@
 
 Several quick start options are available:
 
--   Clone the repo: `https://github.com/ookapratama/laravel-stisla-starter.git`
--   Run `cd` to the newly created `/laravel-stisla` directory
+-   Clone the repo: `https://github.com/kholilullahhhh/sistemPengajuanPKH-laravel.git`
+directory
 -   Run `composer install` command
 -   Run `npm install` command
 -   Run `npx mix` command
 -   Run `cp .env.example .env` command
 -   Run `php artisan key:generate` command
+-   Run `php artisan migrate --seed`
 -   Run `php artisan serve` command
 -   Done
 
