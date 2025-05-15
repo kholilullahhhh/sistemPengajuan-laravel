@@ -27,6 +27,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
+                                                <th>Foto Bukti</th>
                                                 <th>Nama Pelanggan</th>
                                                 <th>Keluhan</th>
                                                 <th>Tanggal keluhan</th>
@@ -39,10 +40,18 @@
                                             @foreach ($data as $i => $v)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
+                                                    <td>
+                                                        @if ($v->foto_bukti_keluhan)
+                                                            <img src="{{ asset(('upload/bukti/') . $v->foto_bukti_keluhan) }}"
+                                                                alt="Foto Bukti" width="100">
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    <td></td>
                                                     <td>{{ $v->pelanggan->nama }}</td>
                                                     <td>{{ $v->keluhan }}</td>
                                                     <td>{{ $v->tgl_keluhan }}</td>
-                                                    <td>
+                                                    
                                                         @if ($v->status_keluhan == 'Diproses')
                                                             <div class="badge badge-primary">
                                                                 {{ $v->status_keluhan }}
@@ -133,6 +142,9 @@
                             $('#id_pelanggan').val(response.data.id_pelanggan);
                             $('#keluhan').val(response.data.keluhan);
                             $('#tgl_keluhan').val(response.data.tgl_keluhan);
+                            $('#foto_bukti_keluhan').val(response.data.foto_bukti_keluhan);
+                            $('#foto_bukti_keluhan').attr('src', '{{ asset('upload/bukti') }}/' +
+                                response.data.foto_bukti_keluhan);
                             $('#status_keluhan').val(response.data.status_keluhan);
                             $('#id_kategori').val(response.data.id_kategori);
 

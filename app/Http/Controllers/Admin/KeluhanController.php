@@ -30,7 +30,30 @@ class KeluhanController extends Controller
     {
 
         $menu = $this->menu;
-        $data = Keluhan::create($request->all());
+        $data = $request->all();
+        $file = $request->file('foto_bukti_keluhan');
+
+        // dd($file->getSize() / 1024);
+        // if ($file->getSize() / 1024 >= 512) {
+        //     return redirect()->route('agenda.create')->with('message', 'size gambar');
+        // }
+
+        $foto = $request->file('foto_bukti_keluhan');
+        $ext = $foto->getClientOriginalExtension();
+        // $r['pas_foto'] = $request->file('pas_foto');
+
+        $nameFoto = date('Y-m-d_H-i-s_') . "." . $ext;
+        $destinationPath = public_path('upload/bukti');
+
+        $foto->move($destinationPath, $nameFoto);
+
+        $fileUrl = asset('upload/bukti/' . $nameFoto);
+        // dd($destinationPath);
+        $data['foto_bukti_keluhan'] = $nameFoto;
+        // dd($data['foto_bukti_keluhan']);
+
+        Keluhan::create($data);
+
 
         // return redirect()->route('keluhan.index');
         return response()->json([

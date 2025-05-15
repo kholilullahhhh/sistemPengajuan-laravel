@@ -28,6 +28,11 @@
                         <input type="text" name="keluhan" id="keluhan" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="foto_bukti_keluhan">Foto Bkti Keluhan</label>
+                        <input type="file" name="foto_bukti_keluhan" id="foto_bukti_keluhan"
+                            class="form-control-file">
+                    </div>
+                    <div class="form-group">
                         <label for="role">Tanggal Keluhan</label>
                         <input type="date" name="tgl_keluhan" id="tgl_keluhan"
                             value="{{ date('Y-m-d') }}" readonly class="form-control">

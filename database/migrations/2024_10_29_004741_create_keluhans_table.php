@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('id_pelanggan');
             $table->integer('id_kategori');
             $table->text('keluhan');
+            $table->string('foto_bukti_keluhan')->nullable();
             $table->date('tgl_keluhan');
             $table->enum('status_keluhan', ['Pending', 'Diproses', 'Selesai']);
             $table->timestamps();
