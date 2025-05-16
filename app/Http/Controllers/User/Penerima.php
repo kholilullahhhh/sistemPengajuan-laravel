@@ -48,7 +48,7 @@ class Penerima extends Controller
     {
         $r = $request->all();
 
-        // 
+
         // $file = $request->file('foto');
 
         // $ext = $file->getClientOriginalExtension();
@@ -59,6 +59,23 @@ class Penerima extends Controller
         // $fileUrl = asset('upload/rumah/' . $nameFoto);
         // $r['foto'] = $nameFoto;
         // $r['id_pelanggan'] = 1;
+
+        $file = $request->file('foto_bukti_keluhan');
+
+        $foto = $request->file('foto_bukti_keluhan');
+        $ext = $foto->getClientOriginalExtension();
+        // $r['pas_foto'] = $request->file('pas_foto');
+
+        $nameFoto = date('Y-m-d_H-i-s_') . "." . $ext;
+        $destinationPath = public_path('upload/bukti');
+
+        $foto->move($destinationPath, $nameFoto);
+
+        $fileUrl = asset('upload/bukti/' . $nameFoto);
+        // dd($destinationPath);
+        $r['foto_bukti_keluhan'] = $nameFoto;
+        // dd($data['foto_bukti_keluhan']);
+
         $r['tgl_terdaftar'] = Carbon::now();
         Pelanggan::create($r);
         $getPelanggan = Pelanggan::latest()->first();
@@ -83,7 +100,7 @@ class Penerima extends Controller
     public function show(Request $r)
     {
         $r = $r->all();
-        $r['email'] = $r['email']  ?? '';
+        $r['email'] = $r['email'] ?? '';
         $pelanggan = DB::table('pelanggans')->where('email', $r['email'])->first();
 
         if ($pelanggan) {

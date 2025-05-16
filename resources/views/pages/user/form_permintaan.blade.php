@@ -49,6 +49,10 @@
                             <input type="text" required name="alamat" class="form-control " />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="foto_bukti_keluhan">Foto Bkti Keluhan</label>
+                        <input type="file" name="foto_bukti_keluhan" id="foto_bukti_keluhan" class="form-control-file">
+                    </div>
 
                 </div>
                 <div class="row">
