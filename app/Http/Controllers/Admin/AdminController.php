@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\AnggotaRumahTangga;
 use App\Models\KepalaRumah;
 use App\Models\PenerimaPKH;
+use App\Models\KategoriKeluhan;
+use App\Models\Keluhan;
+use App\Models\Pelanggan;
+use App\Models\Tanggapan;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +30,9 @@ class AdminController extends Controller
     public function index()
     {
         $menu = $this->menu;
-      
-        return view('pages.admin.index', compact('menu'));
+        $kategori = keluhan::with('kategori')->get();
+
+        return view('pages.admin.index', compact('menu', 'kategori'));
     }
 
     public function statistik()
@@ -56,7 +62,8 @@ class AdminController extends Controller
 
         // Load the view with the data
         $pdf = Pdf::loadView('pages.admin.rekap.cetak', compact('data'))
-            ->setPaper('a3', 'landscape');;
+            ->setPaper('a3', 'landscape');
+        ;
 
         // Download the PDF
         return $pdf->download('data-rekapan-PKH.pdf');

@@ -1,50 +1,65 @@
-@extends('layouts.app', ['title' => 'Layout Default'])
+@extends('layouts.app', ['title' => 'Dashboard Admin'])
 
 @section('content')
-    @push('styles')
-    @endpush
 
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Selamat Datang</h1>
-
+                <h1>Dashboard</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="#">Home</a></div>
+                    <div class="breadcrumb-item">Dashboard</div>
+                </div>
             </div>
 
-            <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 bg">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Total Pengguna</h6>
+                                <h3 class="font-weight-bold">{{ \App\Models\User::count() }}</h3>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="section-body">
-                   
+                    <!-- Card 2 -->
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Total Pelanggan</h6>
+                                <h3 class="font-weight-bold">{{ \App\Models\Pelanggan::count() }}</h3>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Card 3 -->
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Keluhan Masuk</h6>
+                                <h3 class="font-weight-bold">{{ \App\Models\Keluhan::count() }}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Tanggapan Diberikan</h6>
+                                <h3 class="font-weight-bold">{{ \App\Models\Tanggapan::count() }}</h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
-
-            {{-- <div class="section-body">
-                <h2 class="section-title">This is Example Page</h2>
-                <p class="section-lead">This page is just an example for you to create your own page.</p>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Example Card</h4>
-                    </div>
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                    <div class="card-footer bg-whitesmoke">
-                        This is card footer
-                    </div>
-                </div>
-            </div> --}}
+            </div>
         </section>
     </div>
 
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-       
+        
     @endpush
 @endsection

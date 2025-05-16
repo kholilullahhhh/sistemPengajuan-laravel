@@ -14,4 +14,6 @@ class KategoriKeluhan extends Model
         'nama_kategori'
     ];
 
+    
+
 }
