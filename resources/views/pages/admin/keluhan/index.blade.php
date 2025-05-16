@@ -44,14 +44,11 @@
                                                         @if ($v->foto_bukti_keluhan)
                                                             <img src="{{ asset(('upload/bukti/') . $v->foto_bukti_keluhan) }}"
                                                                 alt="Foto Bukti" width="100">
-                                                        @else
-                                                            -
                                                         @endif
-                                                    <td></td>
                                                     <td>{{ $v->pelanggan->nama }}</td>
                                                     <td>{{ $v->keluhan }}</td>
                                                     <td>{{ $v->tgl_keluhan }}</td>
-                                                    
+                                                    <td>
                                                         @if ($v->status_keluhan == 'Diproses')
                                                             <div class="badge badge-primary">
                                                                 {{ $v->status_keluhan }}
