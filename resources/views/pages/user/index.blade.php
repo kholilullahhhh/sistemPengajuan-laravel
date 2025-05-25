@@ -2,176 +2,430 @@
 
 @section('content')
     @push('styles')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <style>
+            .hero-section {
+                padding-top: 100px;
+                height: 60vh;
+                align-items: center;
+                background: linear-gradient(135deg, #6777ef 0%, #3b4dbb 100%);
+                color: white;
+                padding-bottom: 5rem;
+                margin-top: 10rem;
+            }
+
+            .feature-card {
+                transition: all 0.3s ease;
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                height: 100%;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                color: #6777ef;
+            }
+
+            .stats-card {
+                border-radius: 10px;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+
+            .stats-number {
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+
+            .testimonial-card {
+                border-left: 4px solid #6777ef;
+            }
+
+            .scrollspy-nav {
+                position: sticky;
+                top: 100px;
+            }
+
+            .scrollspy-link.active {
+                color: #6777ef !important;
+                font-weight: bold;
+                border-left: 3px solid #6777ef;
+                padding-left: 10px;
+            }
+
+            #progress-container {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 999;
+            }
+
+            #progress-circle {
+                width: 50px;
+                height: 50px;
+                background: #6777ef;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .section-title {
+                position: relative;
+                padding-bottom: 15px;
+                margin-bottom: 30px;
+            }
+
+            .section-title:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 60px;
+                height: 3px;
+                background: #6777ef;
+            }
+        </style>
     @endpush
 
-    <div class="main-content ">
-        <section class="section">
-            <div class="section-header">
-                <section class="section">
-                    <div class="section-header">
-                        <h1>Aplikasi Pengajuan Sistem Informasi Pencatatan Keluhan Pelanggan Berbasis Web</h1>
+    <!-- Hero Section -->
+    <section class="hero-section  text-center animate__animated animate__fadeIn mb-5">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold mb-4">Sistem Pengaduan Pelanggan</h1>
+            <p class="lead mb-5">Solusi digital untuk menangani keluhan pelanggan secara cepat, transparan, dan terstruktur
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ route('permintaan.index') }}" class="btn btn-light btn-lg px-4 py-2">Ajukan Pengaduan</a>
+                <a href="#features" class="btn btn-outline-light btn-lg px-4 py-2">Pelajari Fitur</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- Stats Section -->
+    <section class="container mb-5">
+        <div class="row" id="stats-counter">
+            <div class="col-md-4">
+                <div class="stats-card card bg-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope-open-text fa-3x mb-3 text-primary"></i>
+                        <h3 class="stats-number" data-target="1254">0</h3>
+                        <p class="text-muted">Pengaduan Masuk</p>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card card bg-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-3x mb-3 text-success"></i>
+                        <h3 class="stats-number" data-target="987">0</h3>
+                        <p class="text-muted">Pengaduan Selesai</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card card bg-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x mb-3 text-info"></i>
+                        <h3 class="stats-number" data-target="356">0</h3>
+                        <p class="text-muted">Pengguna Terdaftar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="section-body">
-                        <div class="card text-justify" style="font-size: 18px; ">
-                            {{-- <div class="card-header">
-                                <h4>Example Card</h4>
-                            </div> --}}
-                            <div class="card-body">
-                                <p><strong>Aplikasi Pengajuan Sistem Informasi Pencatatan Keluhan Pelanggan Berbasis
-                                        Web</strong> merupakan sebuah solusi digital yang dirancang untuk meningkatkan
-                                    efisiensi dalam proses penanganan keluhan pelanggan secara cepat, transparan, dan
-                                    terstruktur.</p>
-                                <p>Dalam era digital saat ini, pelayanan yang responsif dan akuntabel menjadi tuntutan utama
-                                    dalam menjaga kepuasan pelanggan. Oleh karena itu, aplikasi ini hadir sebagai sistem
-                                    informasi yang memungkinkan pelanggan untuk menyampaikan keluhan atau masukan secara
-                                    langsung melalui platform berbasis web, kapan pun dan di mana pun.</p>
-                                <p>Aplikasi ini memfasilitasi proses pencatatan, pengelolaan, dan tindak lanjut keluhan
-                                    secara sistematis. Setiap pengaduan yang masuk akan tercatat secara otomatis dalam
-                                    sistem dan dapat dipantau status penyelesaiannya oleh pihak terkait, sehingga memperkuat
-                                    kepercayaan publik terhadap kualitas pelayanan yang diberikan.</p>
-                                <p>Dengan fitur-fitur seperti formulir pengaduan online, riwayat keluhan, notifikasi status,
-                                    serta dashboard pemantauan untuk admin dan petugas pelayanan, aplikasi ini diharapkan
-                                    mampu menjadi sarana efektif dalam mewujudkan pelayanan publik yang cepat tanggap,
-                                    transparan, dan berorientasi pada kepuasan pelanggan.</p>
-                            </div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- About Section -->
+                <section id="about" class="mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title section-title">Tentang Sistem Kami</h2>
+                            <p class="card-text" style="font-size: 18px;"><strong>Aplikasi Pengajuan Sistem Informasi
+                                    Pencatatan Keluhan Pelanggan Berbasis Web</strong> merupakan sebuah solusi digital yang
+                                dirancang untuk meningkatkan efisiensi dalam proses penanganan keluhan pelanggan secara
+                                cepat, transparan, dan terstruktur.</p>
+                            <p class="card-text" style="font-size: 18px;">Dalam era digital saat ini, pelayanan yang
+                                responsif dan akuntabel menjadi tuntutan utama dalam menjaga kepuasan pelanggan. Oleh karena
+                                itu, aplikasi ini hadir sebagai sistem informasi yang memungkinkan pelanggan untuk
+                                menyampaikan keluhan atau masukan secara langsung melalui platform berbasis web, kapan pun
+                                dan di mana pun.</p>
+                        </div>
+                    </div>
+                </section>
 
-
-                            <!-- <div class="card">
-                                <div class="card-body text-justify" style="font-size: 18px; ">
-                                    <p><strong>Aplikasi Pengajuan Sistem Informasi Pencatatan Keluhan Pelanggan Berbasis
-                                            Web</strong> dirancang untuk memberikan kemudahan bagi pelanggan dalam
-                                        menyampaikan keluhan, masukan, atau saran terhadap layanan yang diterima. Dengan
-                                        adanya sistem ini, proses pencatatan dan penanganan keluhan menjadi lebih
-                                        transparan, cepat, dan terdokumentasi dengan baik.</p>
-
-                                    <p>Berdasarkan <strong><a target="_blank"
-                                                href="https://peraturan.go.id/id/uu-no-13-tahun-2011">UU No 13 Tahun
-                                                2011</a></strong>, semua program bantuan dan pemberdayaan pemerintah dalam
-                                        rangka penanganan fakir miskin harus berdasarkan Data Terpadu Kesejahteraan Sosial
-                                        (DTKS). Pada dasarnya, pengusulan untuk masuk dalam DTKS ataupun pengusulan menjadi
-                                        Keluarga Penerima Manfaat (KPM) bansos yang merupakan program reguler Kementerian
-                                        Sosial RI (Sembako, PKH, PBI) merupakan kewenangan pemerintah daerah Kabupaten/Kota
-                                        bersama pemerintah lingkup terkecil yaitu desa/kelurahan. Artinya, setiap lurah
-                                        dapat mengusulkan warga yang tidak mampu dan membutuhkan di wilayahnya untuk masuk
-                                        DTKS dan mengakses bantuan.</p>
-
-                                    <p>Kementerian Sosial RI telah menyediakan laman penerima bansos melalui tautan: <a
-                                            target="_blank"
-                                            href="https://cekbansos.kemensos.go.id/">cekbansos.kemensos.go.id</a>. Laman
-                                        tersebut menampilkan nama seluruh penerima bantuan sosial dari Kementerian Sosial RI
-                                        di lingkup desa/kelurahan sesuai pengaturan NAMA dan ALAMAT yang diketikkan.
-                                        Tujuannya agar masyarakat dapat melakukan pengecekan mandiri apakah namanya masuk
-                                        sebagai calon penerima bantuan sosial atau tidak. Selain itu juga dapat mememberikan
-                                        keleluasaan bagi masyarakat untuk dapat mengetahui nama penerima bantuan di
-                                        sekitarnya, sehingga dapat turut menjalankan fungsi pengawasan akan ketepatan
-                                        sasaran bantuan di lingkungannya. Jadi pastikan mengetikkan nama lengkap sesuai KTP
-                                        untuk memastikan data yang keluar adalah data yang dimaksud.</p>
-
-                                    <p>DTKS diupdate secara rutin oleh Dinas Sosial Kabupaten/Kota dengan melibatkan
-                                        Pemerintah Desa/Kelurahan melalui Musyawarah Desa/Musyawarah Kelurahan sesuai
-                                        kebijakan pengelolaan DTKS yang berlaku di masing-masing Kabupaten/Kota. Hasil
-                                        update data dikirimkan ke Kementerian Sosial untuk ditetapkan. Sesuai Peraturan
-                                        Menteri Sosial Nomor 3 Tahun 2021. DTKS diupdate secara berkala dengan penetapan
-                                        setiap bulan oleh Menteri Sosial RI.</p>
-
-                                    <p>Data penerima bantuan sosial merupakan data yang telah disahkan oleh Kementerian
-                                        Sosial sebagai penerima bantuan sosial tertentu periode tertentu. Usulan Penerima
-                                        Bantuan Sosial bersumber dari DTKS yang telah melalui proses verifikasi kelayakan
-                                        oleh Dinas Sosial Kabupaten/Kota. Apabila kemudian diperoleh temuan/laporan bahwa
-                                        ada KPM penerima bantuan sosial terbukti tidak layak mendapatkan bantuan sosial,
-                                        maka Dinas Sosial Kabupaten/Kota dapat menindaklanjuti dengan menidaklayakkan KPM
-                                        tersebut, agar tidak kembali masuk dalam usulan bantuan sosial periode berikutnya.
-                                    </p>
-
-                                    <p>Bantuan sosial dari pemerintah bersifat atensi. Artinya tidak ada kewenangan mutlak
-                                        bagi seseorang ataupun keluarga untuk mempertahankan kepesertaan bansosnya secara
-                                        terus-menerus. Terutama apabila kondisi sosial ekonominya sudah tidak lagi layak
-                                        menjadi penerima dan ada warga lain disekitarnya yang lebih membutuhkan.</p>
-
-                                    <p>Pada dasarnya pengusulan bansos bersifat kewilayahan. Kepala daerah dalam hal ini
-                                        dibantu oleh lurah yang diberikan kewenangan untuk mengusulkan warganya yang layak
-                                        dan membutuhkan untuk menjadi penerima bantuan sosial. Sehingga bagi warga baru di
-                                        suatu wilayah, apabila memang merasa sebagai warga kurang mampu dan membutuhkan
-                                        akses bantuan sosial, dapat melapor dan mengusulkan diri melalui Ketua RT/RW/Dukuh
-                                        setempat sesuai alamat KTP. Selengkapnya terkait pengusulan ada di FAQ No. 1.</p>
-
-                                    <p>Sebelum seseorang/keluarga mengajukan pengusulan bansos, perlu dipastikan dulu status
-                                        keberadaannya dalam DTKS. Proses ini dapat dilakukan di Dinas Sosial Kabupaten/Kota
-                                        sesuai KTP daerah asal. Apabila masih masuk dalam DTKS, maka data akan dipadankan
-                                        melalui akun Sistem Informasi Kesejahteraan Sosial (SIKS-NG) daerah asal menggunakan
-                                        KK/KTP yang sudah pindah ke daerah tujuan untuk memproses Pindah DTKS. Akan tetapi
-                                        bila pada saat pengecekan NIK YBS sudah tidak masuk dalam DTKS, maka kembali ke FAQ
-                                        No.1.</p>
-
-                                    <p>Terkadang muncul pertanyaan, saya pemegang Kartu Kartu Keluarga Sejahtera (KKS).
-                                        Tetapi 1 tahun terakhir ini mengapa tidak pernah cair?</p>
-
-                                    <p>Perlu diluruskan bahwa saat ini kepemilikan Kartu Keluarga Sejahtera (KKS) belum
-                                        tentu berarti merupakan fakir miskin/penerima bansos aktif. Kepemilikan KKS juga
-                                        bisa menandakan bahwa seseorang/keluarga tersebut sebelumnya pernah menjadi penerima
-                                        bansos, yang saat ini bisa jadi sudah bukan penerima bansos.</p>
-
-                                    <p>Perlu dipahami pula bahwa KKS diterbitkan oleh HIMBARA/Bank yang ditunjuk oleh
-                                        Menteri Sosial sebagai penyalur bansos sebagai alat transaksi, agar KPM dapat
-                                        mencairkan saldo bansos yang ada di rekeningnya. Bank diperintahkan oleh Menteri
-                                        Sosial untuk menyalurkan bansos hanya kepada pemilik rekening yang datanya terdaftar
-                                        dalam surat perintah pembayaran.</p>
-
-                                    <p>Dengan demikian ada beberapa kemungkinan yang mempengaruhi pencairan bansos di
-                                        rekening KKS:</p>
-
-                                    <ol>
-                                        <li>Sudah bukan penerima bansos. Beberapa kemungkinannya antara sudah mengundurkan
-                                            diri/graduasi, sudah tidak masuk DTKS.</li>
-                                        <li>Perubahan data adminduk KPM yang mengakibatkan data di rekening tidak sinkron,
-                                            seperti meninggal, pindah adminduk, berganti Kartu Keluarga, dll.</li>
-                                        <li>Pergantian Penyalur. Beberapa kemungkinannya antara peralihan penyaluran dari
-                                            yang semula melalui HIMBARA jadi melalui PT POS, atau pergantian antara HIMBARA
-                                            misal mulai tahun ini BSI masuk ke dalam daftar HIMBARA yang ditunjuk oleh
-                                            Menteri Sosial (<a target="_blank"
-                                                href="https://dinsos.jogjaprov.go.id/wp-content/uploads/2023/12/2023kmsosial053-Penyalur-Sembako-2023.pdf">Kepmensos
-                                                No 53/HUK/2023</a>).</li>
-                                    </ol>
-
-                                    <p><strong>Hal apa saja yang dapat menyebabkan seseorang/keluarga tidak lagi menjadi
-                                            penerima bansos?</strong></p>
-
-                                    <ol>
-                                        <li>Keluar dari DTKS;</li>
-                                        <li>Perubahan administrasi kependudukan yang tidak dilaporkan;</li>
-                                        <li>Mengundurkan diri secara sukarela;</li>
-                                        <li>Ditidaklayakkan oleh Pemerintah Daerah;</li>
-                                        <li>Disanggah oleh masyarakat melalui aplikasi Cek Bansos karena dianggap sudah
-                                            tidak layak menerima/dalam kondisi mampu/tidak miskin;</li>
-                                        <li>Dalam 1 KK sudah tidak memiliki komponen yang dipersyaratkan.</li>
-                                    </ol>
-
-                                    <p>Jika Anda menemukan penerima program yang dinilai mampu dan sudah tidak layak
-                                        mendapatkan bantuan sosial, Anda dapat melapor melalui Pendamping bansos, Pemerintah
-                                        Desa/Kelurahan, Kecamatan, atau langsung ke Dinas Sosial dengan menyertakan
-                                        identitas, alamat terlapor serta bukti-bukti yang jelas agar dapat ditindaklanjuti.
-                                    </p>
-
-                                    <p>Anda juga dapat memanfaatkan mobile app CekBansos dari Kementerian Sosial RI untuk
-                                        memberikan tanggapan kelayakan bagi penerima bantuan sosial yang ada di sekitar
-                                        Anda.</p>
-
-
+                <!-- Features Section -->
+                <section id="features" class="mb-5">
+                    <h2 class="section-title">Fitur Unggulan</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card card h-100">
+                                <div class="card-body">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <h4>Formulir Pengaduan Online</h4>
+                                    <p>Mudah mengajukan keluhan kapan saja dan di mana saja melalui formulir digital yang
+                                        sederhana.</p>
                                 </div>
-                            </div> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card card h-100">
+                                <div class="card-body">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-history"></i>
+                                    </div>
+                                    <h4>Riwayat Pengaduan</h4>
+                                    <p>Pantau perkembangan pengaduan Anda dari waktu ke waktu dengan sistem pelacakan yang
+                                        transparan.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card card h-100">
+                                <div class="card-body">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-bell"></i>
+                                    </div>
+                                    <h4>Notifikasi Real-time</h4>
+                                    <p>Dapatkan pemberitahuan instan melalui email atau SMS saat ada perkembangan pada
+                                        pengaduan Anda.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card card h-100">
+                                <div class="card-body">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h4>Analisis Data</h4>
+                                    <p>Sistem analitik canggih untuk mengidentifikasi pola keluhan dan meningkatkan kualitas
+                                        layanan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
+                <!-- How It Works -->
+                <section id="how-it-works" class="mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title section-title">Cara Kerja Sistem</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <span
+                                                class="badge bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
+                                                style="width: 50px; height: 50px; font-size: 1.2rem;">1</span>
+                                        </div>
+                                        <h5>Ajukan Pengaduan</h5>
+                                        <p>Isi formulir pengaduan dengan detail keluhan Anda.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <span
+                                                class="badge bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
+                                                style="width: 50px; height: 50px; font-size: 1.2rem;">2</span>
+                                        </div>
+                                        <h5>Proses Verifikasi</h5>
+                                        <p>Tim kami akan memverifikasi dan memproses pengaduan Anda.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <span
+                                                class="badge bg-primary rounded-circle d-inline-flex align-items-center justify-content-center"
+                                                style="width: 50px; height: 50px; font-size: 1.2rem;">3</span>
+                                        </div>
+                                        <h5>Tindak Lanjut</h5>
+                                        <p>Pengaduan akan ditindaklanjuti oleh departemen terkait.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
+                <!-- Testimonials -->
+                <section id="testimonials" class="mb-5">
+                    <h2 class="section-title">Apa Kata Pengguna?</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="testimonial-card card h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>"Sistem yang sangat membantu! Pengaduan saya ditanggapi dengan cepat dan
+                                            solutif."</p>
+                                        <footer class="blockquote-footer mt-2">Budi Santoso, <cite
+                                                title="Source Title">Pengguna sejak 2022</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="testimonial-card card h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>"Transparansi proses sangat baik. Saya bisa memantau perkembangan pengaduan kapan
+                                            saja."</p>
+                                        <footer class="blockquote-footer mt-2">Ani Wijaya, <cite
+                                                title="Source Title">Pengguna sejak 2023</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
             </div>
 
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-4">
+                <div class="scrollspy-nav">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Navigasi Cepat</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link scrollspy-link" href="#about">Tentang Sistem</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link scrollspy-link" href="#features">Fitur Unggulan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link scrollspy-link" href="#how-it-works">Cara Kerja</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link scrollspy-link" href="#testimonials">Testimoni</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        </section>
+    <!-- CTA Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Siap Mengajukan Pengaduan?</h2>
+            <p class="lead mb-4">Bergabunglah dengan ribuan pengguna yang telah merasakan kemudahan layanan kami</p>
+            <a href="{{ route('permintaan.index') }}" class="btn btn-light btn-lg px-5 py-3">Ajukan Pengaduan Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Progress Circle -->
+    <div id="progress-container">
+        <div id="progress-circle" title="Kembali ke atas">
+            <i class="fas fa-arrow-up"></i>
+        </div>
     </div>
 
     @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Animated counter
+                const counters = document.querySelectorAll('.stats-number');
+                const speed = 200;
+
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+
+                    if (count < target) {
+                        const updateCount = () => {
+                            const current = +counter.innerText;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current + increment);
+                                setTimeout(updateCount, 1);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    }
+                });
+
+                // Scrollspy navigation
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.scrollspy-link');
+
+                window.addEventListener('scroll', () => {
+                    let current = '';
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+
+                        if (pageYOffset >= (sectionTop - 300)) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                // Back to top button
+                const progressCircle = document.getElementById('progress-circle');
+
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        progressCircle.style.display = 'flex';
+                    } else {
+                        progressCircle.style.display = 'none';
+                    }
+                });
+
+                progressCircle.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        </script>
     @endpush
 @endsection

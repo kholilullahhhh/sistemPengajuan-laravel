@@ -1,6 +1,5 @@
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
-    <a href="/" class="navbar-brand sidebar-gone-hide">{{ $title }}</a>
     <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
     <div class="nav-collapse">
        
@@ -20,7 +19,9 @@
 
 <nav class="navbar navbar-secondary navbar-expand-lg">
     <div class="container">
+        <a href="/" class="navbar-brand sidebar-gone-hide text-primary">{{ $title }}</a>
         <ul class="navbar-nav">
+
            
             <li class="nav-item {{ $menu == 'landing' ? 'active' : '' }}">
                 <a href="/" class="nav-link"><span>Home</span></a>
