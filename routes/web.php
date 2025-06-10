@@ -42,22 +42,29 @@ Route::get('/permintaan/show', [Penerima::class, 'show'])->name('permintaan.cek'
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-// Route::prefix('admin')->group(function () {
-    
+    // Route::prefix('admin')->group(function () {
+
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
+    // Profile User yang Login
+    // Route::get('/profile/{id}', 'AdminController@profile')->name('profile.index');
+    // Route::put('/profile/update', 'AdminController@profile_update')->name('profile.update');
+    Route::get('/profile/update', [AdminController::class, 'profile_update'])->name('profile.update');
+    Route::get('/profile/{id}', [AdminController::class, 'profile'])->name('profile.index');
+
+
     // Route::get('/statistik', [AdminController::class, 'statistik'])->name('admin.statistik');
-    
+
     Route::get('/rekap', [AdminController::class, 'rekap'])->name('admin.rekap');
     Route::post('/cetak-rekap', [AdminController::class, 'cetak_rekap'])->name('admin.cetak-rekap');
     // Route::resource('/admin', AdminController::class);
-    
+
     Route::resource('/akun', AkunController::class);
     Route::get('/akun/edit/{id}', [AkunController::class, 'edit'])->name('akun.edit');
     Route::post('/akun/update', [AkunController::class, 'update'])->name('akun.update');
 
     // Route::get('/akun/{akun}/edit', [AkunController::class, 'edit'])->name('akun.edit');
-    
+
     // Keluhan
     Route::prefix('/keluhan')->group(function () {
         Route::get('/', [KeluhanController::class, 'index'])->name('keluhan.index');
@@ -67,7 +74,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/update', [KeluhanController::class, 'update'])->name('keluhan.update');
         Route::delete('/{id}', [KeluhanController::class, 'delete'])->name('keluhan.delete');
     });
-    
+
     // Tanggapan
     Route::prefix('/tanggapan')->group(function () {
         Route::get('/', [TanggapanController::class, 'index'])->name('tanggapan.index');
@@ -77,7 +84,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/update', [TanggapanController::class, 'update'])->name('tanggapan.update');
         Route::delete('/{id}', [TanggapanController::class, 'delete'])->name('tanggapan.delete');
     });
-    
+
     // Pelanggan
     Route::prefix('/pelanggan')->group(function () {
         Route::get('/', [PelangganController::class, 'index'])->name('pelanggan.index');
@@ -87,7 +94,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/update', [PelangganController::class, 'update'])->name('pelanggan.update');
         Route::delete('/{id}', [PelangganController::class, 'delete'])->name('pelanggan.delete');
     });
-    
+
     // Cetak
     Route::prefix('/cetak')->group(function () {
         Route::get('/', [CetakController::class, 'index'])->name('cetak.index');
@@ -102,19 +109,19 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::prefix('auth')->group(function () {
-    
+
     Route::get('/login-user', [AuthController::class, 'login_user'])->name('auth.login-user');
     Route::post('/login-user', [AuthController::class, 'cek_login_user'])->name('auth.login.cek_user');
 
     Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/login', [AuthController::class, 'cek_login'])->name('auth.login.cek');
-    
+
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
     // Route::get('login', function () {
     //     return view('pages.auth.login', ['menu' => 'auth']);
     // })->name('auth.login');
-    
+
 });
 

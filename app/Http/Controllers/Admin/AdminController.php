@@ -116,4 +116,35 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function profile($id)
+    {
+        $data = User::find($id);
+        return view('pages.admin.profile.index', ['menu' => 'profile', 'data' => $data]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function profile_update(Request $request)
+    {
+        $r = $request->all();
+        // $update_nik = Pegawai::where('nama_lengkap', $r['name'])->first();
+        // $update->nik();
+
+
+        // dd( $r['id']);
+        $user = User::find($r['id']);
+        if ($r['password'] != null) {
+            $r['password'] = bcrypt($r['password']);
+            // dump('ubah password');
+        } else {
+            unset($r['password']);
+        }
+        // dd(true);
+
+        $user->update($r);
+
+        return redirect()->route('dashboard')->with('message', 'update profile');
+    }
 }
