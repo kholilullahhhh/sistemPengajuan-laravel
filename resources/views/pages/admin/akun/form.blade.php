@@ -19,6 +19,10 @@
                         <input type="text" name="name" id="name" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="no_hp">Nomor Handphone</label>
+                        <input type="number" name="no_hp" id="no_hp" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label for="role">Email</label>
                         <input type="email" name="email" id="email" class="form-control">
                     </div>

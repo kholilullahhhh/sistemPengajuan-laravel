@@ -65,6 +65,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Route::get('/akun/{akun}/edit', [AkunController::class, 'edit'])->name('akun.edit');
 
+
     // Keluhan
     Route::prefix('/keluhan')->group(function () {
         Route::get('/', [KeluhanController::class, 'index'])->name('keluhan.index');
@@ -104,6 +105,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/update', [CetakController::class, 'update'])->name('cetak.update');
         Route::delete('/{id}', [CetakController::class, 'delete'])->name('cetak.delete');
     });
+
+
 
 
 });

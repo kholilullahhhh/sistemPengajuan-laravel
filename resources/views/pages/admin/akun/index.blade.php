@@ -29,6 +29,7 @@
                                                 <th class="text-center">#</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
+                                                <th>Nomor Handphone</th>
                                                 <th>Role</th>
                                                 <th>Action</th>
                                             </tr>
@@ -39,6 +40,7 @@
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $v->name }}</td>
                                                     <td>{{ $v->email }}</td>
+                                                    <td>{{ $v->no_hp }}</td>
                                                     <td>{{ $v->role }}</td>
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
