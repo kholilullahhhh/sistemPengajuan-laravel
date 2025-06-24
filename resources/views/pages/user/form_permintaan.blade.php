@@ -1,16 +1,16 @@
 <div class="card-header">
-    <h4>Form Pengaduan</h4>
+    <h4>Form Pengaduan </h4>
 </div>
 
-<div class="col-md-12 col-lg-12">
-    <form action="{{ route('permintaan.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="card">
-            <div class="card-header">
-                <h4>Form Pengaduan</h4>
-            </div>
 
-            <!-- Hapus form yang nested di sini -->
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Form Pengaduan</h4>
+        </div>
+
+        <form action="{{ route('permintaan.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -88,11 +88,15 @@
                 </div>
             </div>
 
-            <div class="card-footer text-right">
-                <button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn btn-secondary mx-1" type="reset">Reset</button>
-            </div>
-        </div>
+    </div>
+
+
+
+
+    <div class="card-footer text-right">
+        <button class="btn btn-primary " type="submit">Submit</button>
+        <button class="btn btn-secondary mx-1" type="reset">Reset</button>
+    </div>
     </form>
 </div>
 

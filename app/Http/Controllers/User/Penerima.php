@@ -101,7 +101,8 @@ class Penerima extends Controller
     {
         $r = $r->all();
         $r['email'] = $r['email'] ?? '';
-        $pelanggan = DB::table('pelanggans')->where('email', $r['email'])->first();
+        // $pelanggan = DB::table('pelanggans')->where('email', $r['email'])->first();
+        $pelanggan = Pelanggan::where('email', $r['email'])->first();
 
         if ($pelanggan) {
             // Query keluhan berdasarkan id pelanggan

@@ -2,77 +2,97 @@
 
 @section('content')
     @push('styles')
+        <style>
+            .complaint-section {
+                transition: all 0.3s ease;
+            }
+            .hidden-section {
+                display: none;
+            }
+            .status-badge {
+                padding: 5px 10px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+            .status-pending {
+                background-color: #fff3cd;
+                color: #856404;
+            }
+            .status-processed {
+                background-color: #cce5ff;
+                color: #004085;
+            }
+            .status-completed {
+                background-color: #d4edda;
+                color: #155724;
+            }
+        </style>
     @endpush
 
-    <div class="main-content ">
+    <div class="main-content">
         <section class="section">
             <div class="section-header">
                 <div class="d-flex">
-                    <button id="buat-permintaan" class="btn btn-primary mr-3">Buat pengaduan</button>
-                    <button id="cek-permintaan" class="btn btn-info">Cek Status pengaduan</button>
+                    <button id="create-complaint-btn" class="btn btn-primary mr-3">Buat pengaduan</button>
+                    <button id="check-status-btn" class="btn btn-info">Cek Status pengaduan</button>
                 </div>
-
             </div>
 
             <div class="section-body">
-                <div id="card-form" class="card">
+                <!-- Complaint Form Section -->
+                <div id="complaint-form-section" class="complaint-section hidden-section">
                     @include('pages.user.form_permintaan')
                 </div>
 
-            </div>
-            <div id="card-status" class="card">
-                <div class="card-header">
-                    <h4>Cek Status pengaduan</h4>
-                </div>
-                <div class="card-body ">
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="">Masukkan Email anda</label>
-                            <input required class="form-control" type="text" name="email" id="email">
+                <!-- Status Check Section -->
+                <div id="status-check-section" class="complaint-section hidden-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Cek Status pengaduan</h4>
                         </div>
-                        <button id="btn-cari" class="btn btn-primary">
-                            Cek Pengajuan
-                        </button>
-                    </div>
+                        <div class="card-body">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="email-input">Masukkan Email anda</label>
+                                    <input required class="form-control" type="email" name="email" id="email-input" placeholder="email@contoh.com">
+                                </div>
+                                <button id="check-submission-btn" class="btn btn-primary">
+                                    <i class="fas fa-search mr-2"></i>Cek Pengajuan
+                                </button>
+                            </div>
 
-                    <div id="data_pengajuan">
-                        <div class="table-responsive mt-4">
-                            <table class="table table-striped " id="table-penerima">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th>Nama Pengadu</th>
-                                        <th>Keluhan</th>
-                                        <th>Kategori Keluhan</th>
-                                        <th>Tanggapan</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dataPengajuan">
-
-                                </tbody>
-                            </table>
+                            <div id="submission-results" class="mt-4 hidden-section">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="submission-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th>Nama Pengadu</th>
+                                                <th>Keluhan</th>
+                                                <th>Kategori Keluhan</th>
+                                                <th>Tanggapan</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="submission-data">
+                                            <!-- Data will be loaded here via AJAX -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
             </div>
+        </section>
     </div>
-
-    </section>
-    </div>
-
 
     @push('scripts')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
-
         <script>
             $(document).ready(function() {
-
+                // Initialize currency input mask
                 $('.currency').inputmask({
                     alias: 'numeric',
                     groupSeparator: ',',
@@ -84,199 +104,111 @@
                     rightAlign: false,
                     removeMaskOnSubmit: true
                 });
-                // Existing DataTable initialization
-                $('#card-form').hide();
-                $('#card-status').hide();
 
-                $('#buat-permintaan').on('click', function() {
-                    $('#card-form').show();
-                    $('#card-status').hide();
+                // Section visibility control
+                const sections = {
+                    'create-complaint-btn': 'complaint-form-section',
+                    'check-status-btn': 'status-check-section'
+                };
+
+                // Show section based on button click
+                $('[id$="-btn"]').on('click', function() {
+                    const sectionId = sections[this.id];
+                    if (sectionId) {
+                        $('.complaint-section').addClass('hidden-section');
+                        $(`#${sectionId}`).removeClass('hidden-section');
+                    }
                 });
 
-                $('#cek-permintaan').on('click', function() {
-                    $('#card-form').hide();
-                    $('#card-status').show();
-                });
+                // Default show complaint form section
+                $('#create-complaint-btn').trigger('click');
 
-                $('#data_pengajuan').hide(); // Show the table if data is available
-                $('#btn-cari').on('click', function() {
-                    let email = $('#email').val();
+                // Check submission status
+                $('#check-submission-btn').on('click', function() {
+                    const email = $('#email-input').val().trim();
+                    
+                    if (!email) {
+                        alert('Silakan masukkan email anda');
+                        return;
+                    }
+
+                    // Show loading state
+                    const btn = $(this);
+                    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...');
 
                     $.ajax({
-                        url: "{{ route('permintaan.cek') }}", // Route to fetch data
+                        url: "{{ route('permintaan.cek') }}",
                         method: 'GET',
-                        data: {
-                            email: email
-                        },
+                        data: { email: email },
                         success: function(response) {
-                            console.log(response);
-
                             if (response.html) {
-                                $('#data_pengajuan').show(); // Show the table if data is available
-                                $('#dataPengajuan').html(response.html);
+                                $('#submission-data').html(response.html);
+                                $('#submission-results').removeClass('hidden-section');
                             } else {
-                                $('#data_pengajuan').hide(); // Hide the table if no data
-                                $('#data_pengajuan').html('<p>No data found</p>');
+                                $('#submission-results').addClass('hidden-section');
+                                alert('Tidak ditemukan pengaduan dengan email tersebut');
                             }
                         },
                         error: function() {
-                            $('#data_pengajuan').hide(); // Hide the table if error
-                            $('#data_pengajuan').html('<p>Error loading data</p>');
+                            alert('Terjadi kesalahan saat memproses permintaan');
+                        },
+                        complete: function() {
+                            btn.prop('disabled', false).html('<i class="fas fa-search mr-2"></i>Cek Pengajuan');
                         }
                     });
                 });
 
+                // Additional modal handlers if needed
+                @if (isset($data->krt->id))
+                    // Modal handlers for detail views
+                    function setupModal(modalId, route) {
+                        $(`#${modalId}`).on('show.bs.modal', function(event) {
+                            const button = $(event.relatedTarget);
+                            const krtId = button.data('krt-id');
+                            const modal = $(this);
+                            const contentId = `${modalId}Content`;
+
+                            $.ajax({
+                                url: route,
+                                method: 'GET',
+                                data: { krt_id: krtId },
+                                success: function(response) {
+                                    modal.find(`#${contentId}`).html(response);
+                                },
+                                error: function() {
+                                    modal.find(`#${contentId}`).html('<p>Error loading data</p>');
+                                }
+                            });
+                        });
+                    }
+
+                    // Setup modals
+                    setupModal('modalAll', "{{ route('detailAll') }}");
+                    setupModal('modalRumah', "{{ route('rumah.show') }}");
+                    setupModal('modalAset', "{{ route('aset.show') }}");
+                    setupModal('artModal', "{{ route('get.art.data') }}");
+
+                    // ART form handling
+                    $('#createArtButton').on('click', function() {
+                        $('#createArtModal').modal('show');
+                    });
+
+                    $('.editArtButton').on('click', function() {
+                        const id = $(this).data('id');
+                        const name = $(this).data('name');
+                        const relationship = $(this).data('relationship');
+
+                        $('#editId').val(id);
+                        $('#editName').val(name);
+                        $('#editRelationship').val(relationship);
+
+                        const action = $('#editArtForm').attr('action').replace(':id', id);
+                        $('#editArtForm').attr('action', action);
+
+                        $('#editArtModal').modal('show');
+                    });
+                @endif
             });
         </script>
-        @if (isset($data->krt->id))
-            {{-- show all --}}
-            <script>
-                $('#modalAll').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget) // Button that triggered the modal
-                    var krtId = button.data('krt-id') // Extract info from data-* attributes
-                    var modal = $(this)
-
-                    // AJAX request to fetch ART data
-                    $.ajax({
-                        url: "{{ route('detailAll') }}", // Route to fetch data
-                        method: 'GET',
-                        data: {
-                            krt_id: krtId
-                        },
-                        success: function(response) {
-                            // Load the response (HTML table) into the modal's body
-                            modal.find('#tableAll').html(response);
-                        },
-                        error: function() {
-                            modal.find('#tableAll').html('<p>Error loading data</p>');
-                        }
-                    });
-
-
-
-
-                });
-            </script>
-
-            <script>
-                $('#artModal').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget) // Button that triggered the modal
-                    var krtId = button.data('krt-id') // Extract info from data-* attributes
-                    var modal = $(this)
-
-                    // AJAX request to fetch ART data
-                    $.ajax({
-                        url: "{{ route('get.art.data') }}", // Route to fetch data
-                        method: 'GET',
-                        data: {
-                            krt_id: krtId
-                        },
-                        success: function(response) {
-                            // Load the response (HTML table) into the modal's body
-                            modal.find('#artTable').html(response);
-                        },
-                        error: function() {
-                            modal.find('#artTable').html('<p>Error loading data</p>');
-                        }
-                    });
-
-
-
-
-                });
-            </script>
-
-            <script>
-                $('#modalRumah').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget); // Button that triggered the modal
-                    var krtId = button.data('krt-id'); // Extract the krt-id from data-* attributes
-                    console.log(krtId);
-                    var modal = $(this)
-                    // Fetch data based on krt-id
-                    $.ajax({
-                        url: '{{ route('rumah.show') }}', // Adjust the URL to your API endpoint
-                        data: {
-                            krt_id: krtId
-                        },
-                        method: 'GET',
-                        success: function(response) {
-                            console.log(response);
-                            // Load the response (HTML table) into the modal's body
-                            modal.find('#modalRumahContent').html(response);
-                        },
-                        error: function() {
-                            modal.find('#modalRumahContent').html('<p>Error loading data</p>');
-                        }
-
-                    });
-                });
-            </script>
-
-            <script>
-                $('#modalAset').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget); // Button that triggered the modal
-                    var krtId = button.data('krt-id'); // Extract the krt-id from data-* attributes
-                    console.log(krtId);
-                    var modal = $(this)
-                    // Fetch data based on krt-id
-                    $.ajax({
-                        url: '{{ route('aset.show') }}', // Adjust the URL to your API endpoint
-                        data: {
-                            krt_id: krtId
-                        },
-                        method: 'GET',
-                        success: function(response) {
-                            console.log(response);
-                            // Load the response (HTML table) into the modal's body
-                            modal.find('#modalAsetContent').html(response);
-                        },
-                        error: function() {
-                            modal.find('#modalAsetContent').html('<p>Error loading data</p>');
-                        }
-
-                    });
-                });
-
-                $('#createArtButton').on('click', function() {
-                    $('#createArtModal').modal('show');
-                });
-
-                // Show the edit modal with data
-                $('.editArtButton').on('click', function() {
-                    var id = $(this).data('id');
-                    var name = $(this).data('name');
-                    var relationship = $(this).data('relationship');
-
-                    $('#editId').val(id);
-                    $('#editName').val(name);
-                    $('#editRelationship').val(relationship);
-
-                    var action = $('#editArtForm').attr('action').replace(':id', id);
-                    $('#editArtForm').attr('action', action);
-
-                    $('#editArtModal').modal('show');
-                });
-
-                $('#createArtButton').on('click', function() {
-                    $('#createArtModal').modal('show');
-                });
-
-                // Show the edit modal with data
-                $('.editArtButton').on('click', function() {
-                    var id = $(this).data('id');
-                    var name = $(this).data('name');
-                    var relationship = $(this).data('relationship');
-
-                    $('#editId').val(id);
-                    $('#editName').val(name);
-                    $('#editRelationship').val(relationship);
-
-                    var action = $('#editArtForm').attr('action').replace(':id', id);
-                    $('#editArtForm').attr('action', action);
-
-                    $('#editArtModal').modal('show');
-                });
-            </script>
-        @endif
     @endpush
 @endsection
