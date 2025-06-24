@@ -29,6 +29,7 @@
                                                 <th class="text-center">#</th>
                                                 <th>Nama Pengadu</th>
                                                 <th>Tanggapan</th>
+                                                <th>Bukti Tanggapan</th>
                                                 <th>Tanggal tanggapan</th>
                                                 <th>Action</th>
                                             </tr>
@@ -39,12 +40,16 @@
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $v->keluhan->pelanggan->nama }}</td>
                                                     <td>{{ $v->tanggapan }}</td>
+                                                    <td>
+                                                        @if ($v->bukti_tanggapan)
+                                                            <img src="{{ asset(('upload/tanggapan/') . $v->bukti_tanggapan) }}"
+                                                                alt="Foto Bukti" width="100">
+                                                        @endif
                                                     <td>{{ $v->tgl_tanggapan }}</td>
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
                                                             data-target="#modal-form" class="modalEdit">
-                                                            <button type="button"
-                                                                class="btn btn-icon btn-warning btn-sm me-1">
+                                                            <button type="button" class="btn btn-icon btn-warning btn-sm me-1">
                                                                 Edit
                                                             </button>
                                                         </a>
@@ -74,11 +79,11 @@
         <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#table-penerima').DataTable();
 
                 // Event untuk tombol Tambah Data Baru
-                $('#btn-add').on('click', function() {
+                $('#btn-add').on('click', function () {
                     $('#modalAddLabel').text('Tambah Tanggapan');
                     $('#submitUpdate').text('Tambah');
                     $('#methodType').val('POST');
@@ -89,7 +94,7 @@
                 });
 
                 // Event handler untuk tombol Edit
-                $(document).on('click', '.modalEdit', function(e) {
+                $(document).on('click', '.modalEdit', function (e) {
                     e.preventDefault();
                     const id = $(this).data('id');
 
@@ -107,7 +112,7 @@
                         data: {
                             id: id
                         },
-                        success: function(response) {
+                        success: function (response) {
                             // Isi modal dengan data dari server
                             $('#formId').val(response.data.id);
                             $('#id_keluhan').val(response.data.id_keluhan);
@@ -117,14 +122,14 @@
                             // Tampilkan modal
                             $('#modal-form').modal('show');
                         },
-                        error: function(error) {
+                        error: function (error) {
                             console.error("Error:", error);
                         }
                     });
                 });
 
                 // Submit form untuk Store atau Update menggunakan AJAX
-                $('#formSubmit').on('submit', function(e) {
+                $('#formSubmit').on('submit', function (e) {
                     e.preventDefault();
 
                     // Disable tombol submit sementara
@@ -144,16 +149,16 @@
                         data: formData,
                         contentType: false,
                         processData: false,
-                        success: function(response) {
+                        success: function (response) {
                             $('#modal-form').modal('hide');
                             swal("Sukses", "Data berhasil disimpan", "success").then(() => location
                                 .reload());
                         },
-                        error: function(error) {
+                        error: function (error) {
                             console.error("Error:", error);
                             swal("Error", "Gagal menyimpan data", "error");
                         },
-                        complete: function() {
+                        complete: function () {
                             $('#submitUpdate').attr('disabled', false);
                         }
                     });
@@ -179,7 +184,7 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             url: "{{ url('admin/tanggapan') }}/" + id,
-                            success: function(response) {
+                            success: function (response) {
                                 if (response) {
                                     swal("Deleted", "Data has been deleted", "success").then(() =>
                                         location.reload());
@@ -187,7 +192,7 @@
                                     swal("Error", "Failed to delete data.", "error");
                                 }
                             },
-                            error: function(error) {
+                            error: function (error) {
                                 console.error("AJAX Error:", error);
                                 swal("Error", "Ajax Error.", "error");
                             },

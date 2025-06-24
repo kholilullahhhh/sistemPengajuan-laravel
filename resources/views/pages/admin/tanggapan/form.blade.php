@@ -28,8 +28,13 @@
                         <input type="text" name="tanggapan" id="tanggapan" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="bukti_tanggapan">Foto Bkti Keluhan</label>
+                        <input type="file" name="bukti_tanggapan" id="bukti_tanggapan" class="form-control-file">
+                    </div>
+                    <div class="form-group">
                         <label for="role">Tanggal Tanggapan</label>
-                        <input type="date" name="tgl_tanggapan" id="tgl_tanggapan" value="{{ date('Y-m-d') }}" readonly class="form-control">
+                        <input type="date" name="tgl_tanggapan" id="tgl_tanggapan" value="{{ date('Y-m-d') }}" readonly
+                            class="form-control">
                     </div>
 
                     <button type="submit" id="submitUpdate" class="btn btn-primary">Tambah</button>

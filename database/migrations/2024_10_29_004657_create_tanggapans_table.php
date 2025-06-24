@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_keluhan');
             $table->string('tanggapan');
+            $table->string('bukti_tanggapan')->nullable();
             $table->date('tgl_tanggapan');
             $table->timestamps();
         });
