@@ -29,7 +29,7 @@
                                                 <th class="text-center">#</th>
                                                 <th>Foto Bukti</th>
                                                 <th>Nama Pelanggan</th>
-                                                <th>Foto Pelanggan</th>
+                                                <th>Bukti Identitas</th>
                                                 <th>Keluhan</th>
                                                 <th>Tanggal keluhan</th>
                                                 <th>Status</th>
