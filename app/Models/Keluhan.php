@@ -15,6 +15,7 @@ class Keluhan extends Model
         'id_kategori',
         'keluhan',
         'foto_bukti_keluhan',
+        'foto_bukti_pelanggan',
         'tgl_keluhan',
         'status_keluhan',
     ];

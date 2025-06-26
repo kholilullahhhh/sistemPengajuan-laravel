@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="foto_bukti_keluhan">Foto Bukti Keluhan</label>
                             <input type="file" name="foto_bukti_keluhan" id="foto_bukti_keluhan"
@@ -68,7 +68,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="foto_bukti_keluhan">Foto Bukti Pelanggan</label>
+                            <input type="file" name="foto_bukti_pelanggan" id="foto_bukti_pelanggan"
+                                class="form-control-file">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="id_kategori">Kategori Keluhan</label>
                             <select required name="id_kategori" id="id_kategori" class="form-control">

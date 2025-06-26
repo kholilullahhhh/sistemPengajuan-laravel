@@ -29,6 +29,7 @@
                                                 <th class="text-center">#</th>
                                                 <th>Foto Bukti</th>
                                                 <th>Nama Pelanggan</th>
+                                                <th>Foto Pelanggan</th>
                                                 <th>Keluhan</th>
                                                 <th>Tanggal keluhan</th>
                                                 <th>Status</th>
@@ -46,6 +47,11 @@
                                                                 alt="Foto Bukti" width="100">
                                                         @endif
                                                     <td>{{ $v->pelanggan->nama }}</td>
+                                                    <td>
+                                                        @if ($v->foto_bukti_pelanggan)
+                                                            <img src="{{ asset(('upload/pelanggan/') . $v->foto_bukti_pelanggan) }}"
+                                                                alt="Foto Bukti" width="100">
+                                                        @endif
                                                     <td>{{ $v->keluhan }}</td>
                                                     <td>{{ $v->tgl_keluhan }}</td>
                                                     <td>
@@ -67,8 +73,7 @@
                                                     <td>
                                                         <a href="" data-id="{{ $v->id }}" data-toggle="modal"
                                                             data-target="#modal-form" class="modalEdit">
-                                                            <button type="button"
-                                                                class="btn btn-icon btn-warning btn-sm me-1">
+                                                            <button type="button" class="btn btn-icon btn-warning btn-sm me-1">
                                                                 Edit
                                                             </button>
                                                         </a>
@@ -98,11 +103,11 @@
         <script src="{{ asset('library/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#table-penerima').DataTable();
 
                 // Event untuk tombol tambah data baru
-                $('#btn-add').on('click', function() {
+                $('#btn-add').on('click', function () {
                     // Set ke mode tambah
                     $('#modalAddLabel').text('Tambah Keluhan');
                     $('#submitUpdate').text('Tambah');
@@ -114,7 +119,7 @@
                 });
 
                 // Event handler untuk tombol edit
-                $(document).on('click', '.modalEdit', function(e) {
+                $(document).on('click', '.modalEdit', function (e) {
                     e.preventDefault();
                     const id = $(this).data('id');
 
@@ -133,7 +138,7 @@
                         // data: {
                         //     id: id
                         // },
-                        success: function(response) {
+                        success: function (response) {
                             // Isi modal dengan data dari server
                             $('#formId').val(response.data.id);
                             $('#id_pelanggan').val(response.data.id_pelanggan);
@@ -148,14 +153,14 @@
                             // Tampilkan modal
                             $('#modal-form').modal('show');
                         },
-                        error: function(error) {
+                        error: function (error) {
                             console.error("Error:", error);
                         }
                     });
                 });
 
                 // Store dan Update data dengan AJAX
-                $('#formSubmit').on('submit', function(e) {
+                $('#formSubmit').on('submit', function (e) {
                     e.preventDefault();
 
                     // Disable tombol submit sementara
@@ -179,16 +184,16 @@
                         dataType: 'json',
                         processData: false,
                         contentType: false,
-                        success: function(response) {
+                        success: function (response) {
                             $('#modal-form').modal('hide');
                             swal("Sukses", "Data berhasil disimpan", "success").then(() => location
                                 .reload());
                         },
-                        error: function(error) {
+                        error: function (error) {
                             console.error("Error:", error);
                             swal("Error", "Gagal menyimpan data", "error");
                         },
-                        complete: function() {
+                        complete: function () {
                             $('#submitUpdate').attr('disabled', false);
                         }
                     });
@@ -215,7 +220,7 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             url: "{{ url('admin/keluhan') }}/" + id,
-                            success: function(response) {
+                            success: function (response) {
                                 if (response) {
                                     swal("Deleted", "Data has been deleted", "success").then(() =>
                                         location.reload());
@@ -223,7 +228,7 @@
                                     swal("Error", "Failed to delete data.", "error");
                                 }
                             },
-                            error: function(error) {
+                            error: function (error) {
                                 console.error("AJAX Error:", error);
                                 swal("Error", "Ajax Error.", "error");
                             },

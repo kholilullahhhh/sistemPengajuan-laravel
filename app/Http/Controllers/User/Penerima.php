@@ -48,51 +48,42 @@ class Penerima extends Controller
     {
         $r = $request->all();
 
+        // Handling foto_bukti_keluhan upload
+        $fotoKeluhan = $request->file('foto_bukti_keluhan');
+        if ($fotoKeluhan) {
+            $extKeluhan = $fotoKeluhan->getClientOriginalExtension();
+            $nameFotoKeluhan = date('Y-m-d_H-i-s_') . "keluhan." . $extKeluhan;
+            $destinationPathKeluhan = public_path('upload/bukti');
+            $fotoKeluhan->move($destinationPathKeluhan, $nameFotoKeluhan);
+            $fileUrlKeluhan = asset('upload/bukti/' . $nameFotoKeluhan);
+            $r['foto_bukti_keluhan'] = $nameFotoKeluhan;
+        }
 
-        // $file = $request->file('foto');
+        // Handling foto_bukti_pelanggan upload
+        $fotoPelanggan = $request->file('foto_bukti_pelanggan');
+        if ($fotoPelanggan) {
+            $extPelanggan = $fotoPelanggan->getClientOriginalExtension();
+            $nameFotoPelanggan = date('Y-m-d_H-i-s_') . "pelanggan." . $extPelanggan;
+            $destinationPathPelanggan = public_path('upload/pelanggan');
+            $fotoPelanggan->move($destinationPathPelanggan, $nameFotoPelanggan);
+            $fileUrlPelanggan = asset('upload/pelanggan/' . $nameFotoPelanggan);
+            $r['foto_bukti_pelanggan'] = $nameFotoPelanggan;
+        }
 
-        // $ext = $file->getClientOriginalExtension();
-
-        // $nameFoto = date('Y-m-d_H-i-s_') . "." . $ext;
-        // $destinationPath = public_path('upload/rumah');
-        // $file->move($destinationPath, $nameFoto);
-        // $fileUrl = asset('upload/rumah/' . $nameFoto);
-        // $r['foto'] = $nameFoto;
-        // $r['id_pelanggan'] = 1;
-
-        $file = $request->file('foto_bukti_keluhan');
-
-        $foto = $request->file('foto_bukti_keluhan');
-        $ext = $foto->getClientOriginalExtension();
-        // $r['pas_foto'] = $request->file('pas_foto');
-
-        $nameFoto = date('Y-m-d_H-i-s_') . "." . $ext;
-        $destinationPath = public_path('upload/bukti');
-
-        $foto->move($destinationPath, $nameFoto);
-
-        $fileUrl = asset('upload/bukti/' . $nameFoto);
-        // dd($destinationPath);
-        $r['foto_bukti_keluhan'] = $nameFoto;
-        // dd($data['foto_bukti_keluhan']);
-
+        // Store the rest of the data
         $r['tgl_terdaftar'] = Carbon::now();
         Pelanggan::create($r);
-        $getPelanggan = Pelanggan::latest()->first();
-        // dd($getPelanggan);
 
+        $getPelanggan = Pelanggan::latest()->first();
         $r['id_pelanggan'] = $getPelanggan->id;
         $r['tgl_keluhan'] = Carbon::now();
         $r['status_keluhan'] = 'Diproses';
 
-
-        // dd($r);
         Keluhan::create($r);
-
-
 
         return redirect()->route('permintaan.index')->with('message', 'store permintaan');
     }
+
 
     /**
      * Display the specified resource.
