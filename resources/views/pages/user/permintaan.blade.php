@@ -69,6 +69,7 @@
                                             <tr>
                                                 <th class="text-center">#</th>
                                                 <th>Nama Pengadu</th>
+                                                <th>NIK</th>
                                                 <th>Keluhan</th>
                                                 <th>Kategori Keluhan</th>
                                                 <th>Tanggapan</th>

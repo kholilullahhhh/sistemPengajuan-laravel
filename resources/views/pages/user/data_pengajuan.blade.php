@@ -3,6 +3,7 @@
         {{-- {{ dd($tanggapan) }} --}}
         <td class="text-center">{{ $index + 1 }}</td>
         <td>{{ $pelanggan->nama }}</td>
+        <td>{{ $pelanggan->nik }}</td>
         <td>{{ $k->keluhan }}</td>
         <td>{{ $k->nama_kategori }}</td>
         <td>
