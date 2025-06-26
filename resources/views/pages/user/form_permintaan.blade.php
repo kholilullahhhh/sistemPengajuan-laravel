@@ -13,15 +13,22 @@
             @csrf
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="nama">Nama Lengkap</label>
                             <input required name="nama" id="nama" type="text" class="form-control"
                                 placeholder="Masukkan nama lengkap">
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="nil">NIk</label>
+                            <input required name="nik" id="nik" type="number" class="form-control"
+                                placeholder="Masukkan NIK Anda">
+                        </div>
+                    </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input required name="email" id="email" type="email" class="form-control"

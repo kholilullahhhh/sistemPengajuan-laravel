@@ -28,6 +28,7 @@
                                             <tr>
                                                 <th class="text-center">#</th>
                                                 <th>Nama Pengadu</th>
+                                                <th>NIk</th>
                                                 <th>Email</th>
                                                 <th>No Telp</th>
                                                 <th>Alamat</th>
@@ -41,6 +42,7 @@
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $v->nama }}</td>
+                                                    <td>{{ $v->nik }}</td>
                                                     <td>{{ $v->email }}</td>
                                                     <td>{{ $v->telepon }}</td>
                                                     <td>{{ $v->alamat }}</td>
